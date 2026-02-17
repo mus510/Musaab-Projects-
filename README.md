@@ -4,6 +4,7 @@ This repository contains my university and personal projects:
 
 - TimeFlow (Final Year Project) – Node.js, JavaScript, MySQL
 - Esport Web Platform – PHP, JavaScript, MySQL
+- - BMI Calculator Mobile App – .NET MAUI
 - Time2Study Mobile App – Android Studio
 - Family Website – HTML, CSS, JavaScript
 - Online Store Concept Website – HTML, CSS, JavaScript
