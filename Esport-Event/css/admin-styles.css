@@ -1,0 +1,70 @@
+.admin-login-body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    border: 1px solid #00f3ff;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.security-badge {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0a0a0a;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #ff4655;
+    color: #ff4655;
+    font-size: 0.9rem;
+}
+
+.btn-admin-login {
+    background: linear-gradient(45deg, #00f3ff, #0066ff);
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-admin-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
+}
+
+.security-alert {
+    color: #ff4655;
+    font-size: 0.8rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 70, 85, 0.3);
+    padding-top: 1rem;
+}
+
+.admin-logo {
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+}
+
+/* Input Validation States */
+.was-validated .form-control:invalid {
+    border-color: #ff4655;
+    background: rgba(255, 70, 85, 0.05);
+}
+
+.was-validated .form-control:valid {
+    border-color: #00f3ff;
+}

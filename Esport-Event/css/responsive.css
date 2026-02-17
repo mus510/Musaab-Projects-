@@ -1,0 +1,166 @@
+/* responsive.css - Mobile-First Esports Styles */
+
+/* ===== Base Mobile Styles ===== */
+.container {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  /* ===== Navigation ===== */
+  .nav-desktop {
+    display: none;
+  }
+  
+  .nav-mobile {
+    display: block;
+  }
+  
+  .hamburger-menu {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+  
+  /* ===== Hero Section ===== */
+  .hero-video {
+    height: 50vh;
+  }
+  
+  .hero-heading {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  /* ===== Registration Form ===== */
+  .registration-form {
+    padding: 1rem;
+  }
+  
+  .form-input {
+    font-size: 14px;
+  }
+  
+  /* ===== Games Grid ===== */
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* ===== Schedule Table ===== */
+  .schedule-table {
+    font-size: 0.8rem;
+  }
+  
+  /* ===== Media Queries ===== */
+  @media (min-width: 480px) {
+    .hero-heading {
+      font-size: 2.5rem;
+    }
+    
+    .games-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    /* Tablet Styles */
+    .container {
+      width: 90%;
+    }
+  
+    .nav-desktop {
+      display: flex;
+    }
+  
+    .nav-mobile {
+      display: none;
+    }
+  
+    .hero-video {
+      height: 70vh;
+    }
+  
+    .registration-form {
+      padding: 2rem;
+    }
+  
+    .games-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .schedule-table {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    /* Desktop Styles */
+    .container {
+      width: 1200px;
+    }
+  
+    .hero-content {
+      padding: 0 10%;
+    }
+  
+    .hero-heading {
+      font-size: 4rem;
+    }
+  
+    .games-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  
+    .schedule-table {
+      overflow: visible;
+    }
+  }
+  
+  @media (min-width: 1440px) {
+    /* Large Desktop Adjustments */
+    .hero-video {
+      height: 80vh;
+    }
+  }
+  
+  /* ===== Touch Device Optimization ===== */
+  @media (hover: none) and (pointer: coarse) {
+    .game-card {
+      transform: none !important;
+    }
+    
+    .cta-button {
+      min-width: 120px;
+      padding: 1rem;
+    }
+  }
+  
+  /* ===== Landscape Orientation ===== */
+  @media (orientation: landscape) and (max-width: 768px) {
+    .hero-video {
+      height: 100vh;
+    }
+    
+    .nav-desktop {
+      display: none;
+    }
+  }
+  
+  /* ===== High Contrast Mode ===== */
+  @media (prefers-contrast: more) {
+    .form-input {
+      border-width: 2px;
+    }
+  }
+  
+  /* ===== Print Styles ===== */
+  @media print {
+    .hero-video,
+    .nav-desktop,
+    .nav-mobile {
+      display: none;
+    }
+  
+    .schedule-table {
+      font-size: 12pt;
+    }
+  }
