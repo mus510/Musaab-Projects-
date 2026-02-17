@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone Store | Premium Gaming Gear</title>
+    <style>
+        :root {
+            --primary-color: #0066ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .store-header {
+            background: linear-gradient(rgba(0,0,0,0.8), url('store-banner.jpg'));
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-price {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            margin: 10px 0;
+        }
+
+        .btn-addtocart {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .btn-addtocart:hover {
+            background: #0052cc;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            right: -350px;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background: var(--card-bg);
+            padding: 20px;
+            transition: right 0.3s ease;
+        }
+
+        .cart-open {
+            right: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+        }
+
+        .checkout-section {
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="store-header">
+        <div class="container">
+            <h1>GameZone Store</h1>
+            
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="store-controls">
+            <button class="btn-viewcart" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i> Cart (<span id="cartCount">0</span>)
+            </button>
+        </div>
+
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="/Esport-Event/pic/OIP.jpg" alt="Gaming Mouse" class="product-image">
+                <h3>Pro Gaming Mouse</h3>
+                <p class="product-price">RM 199.99</p>
+                <button class="btn-addtocart" onclick="addToCart('Gaming Mouse', 199.99)">
+                    Add to Cart
+                </button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="/Esport-Event/pic/CORSAIR-K65-RGB-MINI-mechanical-gaming-keyboard3-1536x1147.png" alt="Mechanical Keyboard" class="product-image">
+                <h3>Mechanical Keyboard</h3>
+                <p class="product-price">RM 299.99</p>
+                <button class="btn-addtocart" onclick="addToCart('Mechanical Keyboard', 299.99)">
+                    Add to Cart
+                </button>
+            </div>
+
+            <!-- Add more products -->
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <h2>Shopping Cart</h2>
+        <div id="cartItems"></div>
+        
+        <div class="checkout-section">
+            <h3>Total: RM<span id="cartTotal">0.00</span></h3>
+            <button class="btn-checkout">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('cart-open');
+        }
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            total += price;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div>${item.name}</div>
+                    <div>RM ${item.price.toFixed(2)}</div>
+                `;
+                cartItems.appendChild(div);
+            });
+
+            cartCount.textContent = cart.length;
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        // Close cart when clicking outside
+        window.onclick = function(event) {
+            const cartSidebar = document.getElementById('cartSidebar');
+            if (!event.target.closest('.cart-sidebar') && 
+                !event.target.closest('.btn-viewcart')) {
+                cartSidebar.classList.remove('cart-open');
+            }
+        }
+    </script>
+</body>
+</html>
