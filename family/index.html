@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع العائلة التفاعلي | ذكريات وألعاب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --gray: #6B7280;
+            --border: #E5E7EB;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* التصميم العام */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            font-size: 2.2rem;
+            color: var(--dark);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #3c35d4;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: #0da271;
+        }
+        
+        /* الشريط العلوي */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* القسم البطولي */
+        .hero {
+            background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(16, 185, 129, 0.8)), url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* معرض الصور */
+        .gallery {
+            background-color: white;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .photo-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .photo-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .photo-content {
+            padding: 20px;
+        }
+        
+        .photo-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .photo-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .rating {
+            margin-bottom: 15px;
+        }
+        
+        .rating i {
+            color: var(--accent);
+            margin-left: 2px;
+        }
+        
+        .comments {
+            margin-top: 15px;
+        }
+        
+        .comment {
+            background: var(--light);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .add-comment {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .add-comment input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px 0 0 8px;
+            font-size: 0.9rem;
+        }
+        
+        .add-comment button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .add-comment button:hover {
+            background: #3c35d4;
+        }
+        
+        /* قسم الألعاب */
+        .games {
+            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+        }
+        
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .game-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .game-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .players {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .player {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            font-weight: 600;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+        
+        /* الفوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-left: 10px;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوب مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل العلوي -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    
+                    <span>موقع العائلة</span>
+                </div>
+                
+                    <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="/family/pages/gallery.html"><i class=></i> معرض الصور</a></li>
+                    <li><a href="#games"><i class="fas fa-gamepad"></i> الألعاب</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> أفراد العائلة</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- القسم البطولي -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>مرحباً بكم في موقع عائلتنا</h1>
+                <p>هنا نجمع ذكرياتنا الجميلة، نشارك الصور، نلعب الألعاب الممتعة، ونخلق لحظات لا تنسى معاً</p>
+                <div>
+                    <a href="/family/pages/gallery.html" class="btn"><i class="fas fa-images"></i> تصفح الصور</a>
+                    <a href="#games" class="btn btn-secondary"><i class="fas fa-gamepad"></i> العب الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- معرض الصور -->
+    <section id="gallery" class="section gallery">
+        <div class="container">
+            <h2 class="section-title"> المناسبات </h2>
+            <div class="gallery-container">
+                <!-- الصورة 1 -->
+                <div class="photo-card fade-in">
+                    <img src="https://c8.alamy.com/comp/2J2W814/happy-eid-ul-fitr-mubarak-background-illustration-with-pictures-of-mosques-moon-antennas-and-others-suitable-for-posters-2J2W814.jpg" alt="اجتماع عائلي" class="photo-img">
+                    <div class="photo-content">
+                        <h3 class="photo-title">  عيد الفطر</h3>
+                        <span class="photo-date"><i class="far fa-calendar"></i> 15 مايو 2025</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <div class="comment-author">مصعب</div>
+                                <div>أجمل يوم في السنة!</div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-author">ehh</div>
+                                <div>كم كان الطعام لذيذاً! شكراً للجميع</div>
+                            </div>
+                        </div>
+                        <div class="add-comment">
+                            <input type="text" placeholder="أضف تعليقك...">
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الصورة 2 -->
+                <div class="photo-card fade-in delay-1">
+                    <img src="https://www.almowaten.net/wp-content/uploads/2021/12/1485074298177347400.jpg" alt="رحلة بحرية" class="photo-img">
+                    <div class="photo-content">
+                        <h3 class="photo-title">رحلة العيد </h3>
+                        <span class="photo-date"><i class="far fa-calendar"></i> 10 أغسطس 2025</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(5.0)</span>
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <div class="comment-author">ehh</div>
+                                <div>أفضل رحلة هذا الصيف! شكراً لكم جميعاً</div>
+                            </div>
+                        </div>
+                        <div class="add-comment">
+                            <input type="text" placeholder="أضف تعليقك...">
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الصورة 3 -->
+                <div class="photo-card fade-in delay-2">
+                    <img src="https://cdn1.sisiplus.co.id/media/sisiplus/asset/uploads/artikel/BWm5DNdWA0fnnfWBfp5auTfynpRZjB3RgGWBbzCD.jpg" alt="سيارة عائلية" class="photo-img">
+                    <div class="photo-content">
+                        <h3 class="photo-title">  رمضان</h3>
+                        <span class="photo-date"><i class="far fa-calendar"></i> 3 يناير 2025</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(4.0)</span>
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <div class="comment-author">معتصم</div>
+                                <div>الله يتقبل</div>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-author">ehh</div>
+                                <div> من الجميع يارب  </div>
+                            </div>
+                        </div>
+                        <div class="add-comment">
+                            <input type="text" placeholder="أضف تعليقك...">
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الألعاب -->
+    <section id="games" class="section games">
+        <div class="container">
+            <h2 class="section-title">الألعاب العائلية</h2>
+            <div class="games-container">
+                <!-- لعبة 1 -->
+                <div class="game-card fade-in">
+                    <div class="game-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="game-title">كلمة السر</h3>
+                    <p class="game-desc">اختبر معرفتك مع لعبة الألغاز الأسرية الممتعة! حاول تخمين الكلمة قبل نفاذ الوقت.</p>
+                    <div class="players">
+                        <div class="player">أ</div>
+                        <div class="player">ع</div>
+                        <div class="player">م</div>
+                    </div>
+                    <a href="/pages/passwordgame.html" class="btn"><i class="fas fa-play"></i> ابدأ اللعب</a>
+                </div>
+                
+                <!-- لعبة 2 -->
+                <div class="game-card fade-in delay-1">
+                    <div class="game-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3 class="game-title">اكس او </h3>
+                    <p class="game-desc">اكس اوو</p>
+                    <div class="players">
+                        <div class="player">أ</div>
+                        <div class="player">ع</div>
+                    </div>
+                    <a href="/pages/XOgame.html" class="btn"><i class="fas fa-play"></i> ابدأ اللعب</a>
+                </div>
+                
+                <!-- لعبة 3 -->
+                <div class="game-card fade-in delay-2">
+                    <div class="game-icon">
+                        <i class="fas fa-dice"></i>
+                    </div>
+                    <h3 class="game-title">طاولة الزهر</h3>
+                    <p class="game-desc">لعبة الحظ والمهارة الشهيرة التي تجمع بين الصغار والكبار في جو من المرح.</p>
+                    <div class="players">
+                        <div class="player">م</div>
+                        <div class="player">أ</div>
+                        <div class="player">ع</div>
+                        <div class="player">م</div>
+                    </div>
+                    <a href="/pages/game3.html" class="btn"><i class="fas fa-play"></i> ابدأ اللعب</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن موقع العائلة</h3>
+                    <p>هو موقع تفاعلي يهدف إلى توثيق الذكريات الجميلة وتقريب أفراد العائلة من خلال مشاركة الصور والألعاب والتفاعلات الممتعة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الصفحة الرئيسية</a></li>
+                        <li><a href="/pages/gallery.html">معرض الصور</a></li>
+                        <li><a href="/pages/game3.html">الألعاب العائلية</a></li>
+                        <li><a href="#">أحداث العائلة</a></li>
+                        <li><a href="#">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الأحداث القادمة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">يوم ميلاد مصعب - 1 يناير</a></li>
+                        <li><a href="#">العيد - 5 أكتوبر</a></li>
+                        <li><a href="#">حفل تخرج ehh - 20 يونيو</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>اتصل </h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> ماليزيا </li>
+                        <li><i class="fas fa-phone"></i> +601127179894</li>
+                        <li><i class="fas fa-envelope"></i> musab.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2025 | موقع العائلة التفاعلي❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثيرات للعناصر عند التمرير
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+            
+            // إرسال تعليق جديد
+            const commentButtons = document.querySelectorAll('.add-comment button');
+            commentButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+                    const commentText = input.value.trim();
+                    
+                    if (commentText) {
+                        const commentContainer = this.closest('.photo-card').querySelector('.comments');
+                        const newComment = document.createElement('div');
+                        newComment.className = 'comment';
+                        newComment.innerHTML = `
+                            <div class="comment-author">أنت</div>
+                            <div>${commentText}</div>
+                        `;
+                        commentContainer.appendChild(newComment);
+                        input.value = '';
+                        
+                        // إظهار رسالة نجاح
+                        const successMsg = document.createElement('div');
+                        successMsg.textContent = 'تم إضافة تعليقك بنجاح!';
+                        successMsg.style.color = 'green';
+                        successMsg.style.marginTop = '10px';
+                        successMsg.style.fontSize = '0.9rem';
+                        this.parentNode.parentNode.insertBefore(successMsg, this.parentNode.nextSibling);
+                        
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
